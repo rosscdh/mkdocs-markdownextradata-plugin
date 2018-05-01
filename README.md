@@ -37,6 +37,22 @@ More information about plugins in the [MkDocs documentation][mkdocs-plugins]
 ### Use Extra Variables in your markdown files
 
 The variables you define in the mkdown.yml `extra:` slot will become available in your templates
+
+```yaml
+extra:
+  customer:
+    name: Your name here
+    web: www.example.com
+    salt: salt.example.com
+```
+
+and then in your `*.md` files
+
+```jinja
+{{ customer.name }}
+<a href="{{ customer.web }}">{{ customer.web }}</a>
+```
+
 <br/>
 
 ## Contributing
