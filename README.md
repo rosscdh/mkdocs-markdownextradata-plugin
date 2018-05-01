@@ -2,9 +2,9 @@
 
 *A MkDocs plugin that injects the mkdocs.yml extra variables into the markdown template*
 
-The markdownextra plugin allows you to customize how your pages show up the navigation of your MkDocs without having to configure the full structure in your `mkdocs.yml`. It extracts the title from your markdown files and gives you detailed control using a small configuration file directly placed in the relevant directory of your documentation.
-
-> **Note:** This plugin works best without a `pages` entry in your `mkdocs.yml`. Having a `pages` entry is supported, but you might not get the results you expect, especially if your `pages` structure doesn't match the file structure.
+As a user with variables that need to be substituted for multiple projects at the markdown and not the template level.
+In order to defined values such as site urls, client names etc 
+So that I can build my docs with different values for images and urls etc. 
 
 <br/>
 
