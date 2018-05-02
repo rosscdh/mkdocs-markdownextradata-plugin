@@ -11,8 +11,8 @@ setup(
                      'So that I can build my docs with different values for images and urls. ',
     keywords='mkdocs python markdown extra values',
     url='https://github.com/rosscdh/mkdocs-markdownextradata-plugin/',
-    author='Lukas Geiter',
-    author_email='info@lukasgeiter.com',
+    author="Ross Crawford'Heureuse",
+    author_email='sendrossemail@gmail.com',
     license='MIT',
     python_requires='>=3.5',
     install_requires=[
