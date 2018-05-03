@@ -6,7 +6,7 @@
 
 ```
 As a user with variables that need to be inserted at the markdown level, not the template level.
-I need a mkdocks plugin that will inject my `extras` variables into the markdown template before it gets rendered to html.
+I need a mkdocs plugin that will inject my `extras` variables into the markdown template before it gets rendered to html.
 So that I can build my markdown pages with different values for images, urls, client_names, etc. 
 ```
 
