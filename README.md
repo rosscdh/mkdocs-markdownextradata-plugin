@@ -2,9 +2,13 @@
 
 *A MkDocs plugin that injects the mkdocs.yml extra variables into the markdown template*
 
-As a user with variables that need to be substituted for multiple projects at the markdown and not the template level.
-In order to defined values such as site urls, client names etc 
-So that I can build my docs with different values for images and urls etc. 
+**usecase**
+
+```
+As a user with variables that need to be inserted at the markdown level, not the template level.
+I need a mkdocs plugin that will inject my `extras` variables into the markdown template before it gets rendered to html.
+So that I can build my markdown pages with different values for images, urls, client_names, etc. 
+```
 
 <br/>
 
