@@ -19,7 +19,7 @@ So that I can build my markdown pages with different values for images, urls, cl
 Install the package with pip:
 
 ```bash
-pip install mkdocs-markdownextra-plugin
+pip install mkdocs-markdownextradata-plugin
 ```
 
 Enable the plugin in your `mkdocs.yml`:
@@ -27,7 +27,7 @@ Enable the plugin in your `mkdocs.yml`:
 ```yaml
 plugins:
     - search
-    - markdownextra
+    - markdownextradata
 ```
 
 > **Note:** If you have no `plugins` entry in your config file yet, you'll likely also want to add the `search` plugin. MkDocs enables it by default if there is no `plugins` entry set, but now you have to enable it explicitly.

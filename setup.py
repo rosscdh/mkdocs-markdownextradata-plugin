@@ -1,14 +1,16 @@
+import os
 from setuptools import setup, find_packages
+
+
+def read(fname):
+    return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 
 setup(
     name='mkdocs-markdownextradata-plugin',
-    version='0.0.1',
+    version='0.0.4',
     description='A MkDocs plugin that injects the mkdocs.yml extra variables into the markdown template',
-    long_description='As a user with variables that need to be substituted for multiple projects at the markdown '
-                     'and not the template level. '
-                     'In order to defined values such as site urls, client names etc '
-                     'So that I can build my docs with different values for images and urls. ',
+    long_description=read('README.md'),
     keywords='mkdocs python markdown extra values',
     url='https://github.com/rosscdh/mkdocs-markdownextradata-plugin/',
     author='Ross Crawford-d\'Heureuse',
