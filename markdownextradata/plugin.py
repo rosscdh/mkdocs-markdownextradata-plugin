@@ -7,7 +7,7 @@ class MarkdownExtraDataPlugin(BasePlugin):
     """
     Inject config 'extra' variables into the markdown
     """
-    def on_page_markdown(self, markdown, page, config, site_navigation, **kwargs):
+    def on_page_markdown(self, markdown, config, **kwargs):
         if 'extra' not in config:
             return markdown
         else:
