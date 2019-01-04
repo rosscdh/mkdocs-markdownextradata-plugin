@@ -10,7 +10,7 @@ Thank you for considering to contribute to this project. These guidelines will h
 
 ##### Prerequisites
 
-- [Python 3]
+- [Python]
 - [virtualenv]
 
 ##### Steps
@@ -46,6 +46,6 @@ Make sure your code follows [PEP-8](https://www.python.org/dev/peps/pep-0008/) a
 
 If it makes sense, writing tests for your PRs is always appreciated and will help get them merged.
 
-[Python 3]: https://www.python.org/
+[Python]: https://www.python.org/
 [virtualenv]: https://virtualenv.pypa.io/
 [git-commit-message]: https://chris.beams.io/posts/git-commit/
