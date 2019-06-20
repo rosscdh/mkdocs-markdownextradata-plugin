@@ -4,9 +4,8 @@ from jinja2 import Template
 import os
 from pathlib import Path
 import mkdocs
-from ruamel.yaml import YAML
-
-yaml=YAML()
+import yaml
+from itertools import chain
 
 CONFIG_KEYS = [
     'site_name',
@@ -46,15 +45,11 @@ class MarkdownExtraDataPlugin(BasePlugin):
                 if not os.path.exists(data): data = None
 
         if data and os.path.exists(data):
-            for filename in Path(data).glob('**/*.yml'):
+            path = Path(data)
+            for filename in chain(path.glob('**/*.yml'), path.glob('**/*.json')):
                 with open(filename) as f:
                     namespace = os.path.splitext(os.path.relpath(filename, data))[0]
-                    self.__add_data__(config, namespace, yaml.load(f))
-
-            for filename in Path(data).glob('**/*.json'):
-                with open(filename) as f:
-                    namespace = os.path.splitext(os.path.relpath(filename, data))[0]
-                    self.__add_data__(config, namespace, json.load(f))
+                    self.__add_data__(config, namespace, (yaml.load(f) if filename.suffix == '.yml' else json.load(f)))
 
     def on_page_markdown(self, markdown, config, **kwargs):
         context = {key: config.get(key) for key in CONFIG_KEYS if key in config}
