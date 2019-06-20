@@ -1,12 +1,12 @@
 from mkdocs.plugins import BasePlugin
 
 from jinja2 import Template
-from ruamel.yaml import YAML
-yaml=YAML()
 import os
 from pathlib import Path
 import mkdocs
+from ruamel.yaml import YAML
 
+yaml=YAML()
 
 CONFIG_KEYS = [
     'site_name',
