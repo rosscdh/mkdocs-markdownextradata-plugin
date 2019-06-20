@@ -18,7 +18,8 @@ setup(
     license='MIT',
     python_requires='>=2.7.9,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*',
     install_requires=[
-        'mkdocs>=0.17'
+        'mkdocs>=0.17',
+        'ruamel.yaml',
     ],
     classifiers=[
         'Development Status :: 5 - Production/Stable',
