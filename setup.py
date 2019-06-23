@@ -8,7 +8,7 @@ def read(fname):
 
 setup(
     name='mkdocs-markdownextradata-plugin',
-    version='0.0.4',
+    version='0.0.6',
     description='A MkDocs plugin that injects the mkdocs.yml extra variables into the markdown template',
     long_description=read('README.md'),
     keywords='mkdocs python markdown extra values',
