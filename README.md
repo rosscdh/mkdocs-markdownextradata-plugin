@@ -27,13 +27,24 @@ Enable the plugin in your `mkdocs.yml`:
 ```yaml
 plugins:
     - search
-    - markdownextradata:
-        data: path/to/datafiles
+    - markdownextradata: {}
 ```
+
+You are then able to use the mkdocs `extra: {}` hash to pass context data into your files
 
 > **Note:** If you have no `plugins` entry in your config file yet, you'll likely also want to add the `search` plugin. MkDocs enables it by default if there is no `plugins` entry set, but now you have to enable it explicitly.
 
-More information about plugins in the [MkDocs documentation][mkdocs-plugins]
+
+### Using external data files
+
+If the `extra: {}` hash is not enough for your data then you are able to make use of external yaml files to provide that context data
+
+```yaml
+plugins:
+    - search
+    - markdownextradata:
+        data: path/to/datafiles
+```
 
 The data path is optional; when absent, it will look for a `_data`
 folder adjacent to your `mkdocs.yml` and inside your `docs_dir`.
@@ -79,3 +90,8 @@ If you want to contribute to the code of this project, please read the [Contribu
 [mkdocs-plugins]: http://www.mkdocs.org/user-guide/plugins/
 [github-issues]: https://github.com/rosscdh/mkdocs-markdownextradata-plugin/issues
 [contributing]: CONTRIBUTING.md
+
+### Contributors
+
+- [Ross Crawford-d'Heureuse](https://github.com/rosscdh)
+- [Emiliano Heyns](https://github.com/retorquere)
