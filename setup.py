@@ -11,7 +11,7 @@ setup(
     version='0.0.6',
     description='A MkDocs plugin that injects the mkdocs.yml extra variables into the markdown template',
     long_description=read('README.md'),
-    long_description_content_type='markdown',
+    long_description_content_type='text/markdown',
     keywords='mkdocs python markdown extra values',
     url='https://github.com/rosscdh/mkdocs-markdownextradata-plugin/',
     author='Ross Crawford-d\'Heureuse',
