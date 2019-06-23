@@ -12,7 +12,7 @@ So that I can build my markdown pages with different values for images, urls, cl
 
 ## Installation
 
-> **Note:** This package requires MkDocs version 0.17 or higher. 
+**Note:** This package requires MkDocs version 0.17 or higher. 
 
 Install the package with pip:
 
