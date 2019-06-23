@@ -10,8 +10,6 @@ I need a mkdocs plugin that will inject my `extras` variables into the markdown 
 So that I can build my markdown pages with different values for images, urls, client_names, etc. 
 ```
 
-<br/>
-
 ## Installation
 
 > **Note:** This package requires MkDocs version 0.17 or higher. 
