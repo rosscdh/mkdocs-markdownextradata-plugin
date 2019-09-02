@@ -49,7 +49,7 @@ class MarkdownExtraDataPlugin(BasePlugin):
             for filename in chain(path.glob('**/*.yml'), path.glob('**/*.json')):
                 with open(filename) as f:
                     namespace = os.path.splitext(os.path.relpath(filename, data))[0]
-                    self.__add_data__(config, namespace, (yaml.load(f) if filename.suffix == '.yml' else json.load(f)))
+                    self.__add_data__(config, namespace, (yaml.load(f, Loader=yaml.FullLoader) if filename.suffix == '.yml' else json.load(f)))
 
     def on_page_markdown(self, markdown, config, **kwargs):
         context = {key: config.get(key) for key in CONFIG_KEYS if key in config}
