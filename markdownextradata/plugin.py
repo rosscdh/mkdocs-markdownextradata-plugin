@@ -5,6 +5,7 @@ import os
 from pathlib import Path
 import mkdocs
 import yaml
+import json
 from itertools import chain
 
 CONFIG_KEYS = [
