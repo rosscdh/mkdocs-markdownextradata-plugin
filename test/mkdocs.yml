@@ -1,0 +1,13 @@
+site_name: test markdownextradata_plugin
+use_directory_urls: true
+# theme:
+#     name: null
+#     custom_dir: 'theme/'
+plugins:
+    - search
+    - markdownextradata
+
+extra:
+  customer:
+    name: Your name here
+    web_url: www.example.com

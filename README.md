@@ -52,7 +52,6 @@ The paths to these become their variable names, so if inside your data folder yo
 called `sections/captions.yml`, the data inside that file will be available in your
 templates as `sections.captions`.
 
-<br/>
 
 ## Features
 
@@ -75,7 +74,11 @@ and then in your `*.md` files
 <a href="{{ customer.web }}">{{ customer.web }}</a>
 ```
 
-<br/>
+## Testing
+
+```
+pytest test
+```
 
 ## Contributing
 
