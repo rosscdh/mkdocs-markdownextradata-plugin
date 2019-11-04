@@ -77,6 +77,8 @@ and then in your `*.md` files
 ## Testing
 
 ```
+virtualenv venv -p python3.7
+source venv/bin/activate
 python setup.py test
 pytest test
 ```
