@@ -13,6 +13,7 @@ branches:
 
 install:
   - pip install mkdocs pyyaml pytest click
+  - python setup.py install
 
 script:
   - pytest test -s
