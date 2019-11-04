@@ -1,14 +1,26 @@
 import os
 from setuptools import setup, find_packages
-
+from setuptools.command.test import test as TestCommand
 
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
+class PyTest(TestCommand):
+    user_options = []
+
+    def initialize_options(self):
+        TestCommand.initialize_options(self)
+        self.pytest_args = []
+
+    def run_tests(self):
+        #import here, cause outside the eggs aren't loaded
+        import pytest
+        errno = pytest.main(self.pytest_args)
+        sys.exit(errno)
 
 setup(
     name='mkdocs-markdownextradata-plugin',
-    version='0.0.6',
+    version='0.0.7',
     description='A MkDocs plugin that injects the mkdocs.yml extra variables into the markdown template',
     long_description=read('README.md'),
     long_description_content_type='text/markdown',
@@ -17,6 +29,8 @@ setup(
     author='Ross Crawford-d\'Heureuse',
     author_email='sendrossemail@gmail.com',
     license='MIT',
+    tests_require=['pytest'],
+    cmdclass = {'test': PyTest},
     python_requires='>=2.7.9,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*',
     install_requires=[
         'mkdocs>=0.17',
