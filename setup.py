@@ -36,6 +36,8 @@ setup(
     tests_require=[
         'pytest',
         'mkdocs',
+        'pyyaml',
+        'click',
     ],
     cmdclass = {'test': PyTest},
     python_requires='>=2.7.9,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*',

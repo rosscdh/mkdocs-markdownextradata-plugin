@@ -12,7 +12,7 @@ branches:
 
 
 install:
-  - pip install mkdocs pyyaml pytest
+  - pip install mkdocs pyyaml pytest click
 
 script:
   - pytest
