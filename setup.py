@@ -1,4 +1,5 @@
 import os
+import sys
 from setuptools import setup, find_packages
 from setuptools.command.test import test as TestCommand
 
@@ -29,7 +30,10 @@ setup(
     author='Ross Crawford-d\'Heureuse',
     author_email='sendrossemail@gmail.com',
     license='MIT',
-    tests_require=['pytest'],
+    tests_require=[
+        'pytest',
+        'mkdocs',
+    ],
     cmdclass = {'test': PyTest},
     python_requires='>=2.7.9,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*',
     install_requires=[

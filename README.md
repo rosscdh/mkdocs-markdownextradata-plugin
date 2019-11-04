@@ -77,6 +77,7 @@ and then in your `*.md` files
 ## Testing
 
 ```
+python setup.py test
 pytest test
 ```
 
