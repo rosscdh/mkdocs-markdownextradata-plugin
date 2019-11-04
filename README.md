@@ -1,5 +1,7 @@
 # mkdocs-markdownextradata-plugin
 
+[![Build Status](https://travis-ci.org/rosscdh/mkdocs-markdownextradata-plugin.svg?branch=master)](https://travis-ci.org/rosscdh/mkdocs-markdownextradata-plugin)
+
 *A MkDocs plugin that injects the mkdocs.yml extra variables into the markdown template*
 
 **usecase**
