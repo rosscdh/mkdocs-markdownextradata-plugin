@@ -1,11 +1,13 @@
 import os
 import sys
-from pathlib import Path
 from setuptools import setup, find_packages
 from setuptools.command.test import test as TestCommand
 
 def read(fname):
-    return Path(os.path.join(os.path.dirname(__file__), fname)).read_text()
+    file_path = os.path.join(os.path.dirname(__file__), fname)
+    with open(file_path) as file:
+        content = file.read()
+    return content if content else 'no content read'
 
 class PyTest(TestCommand):
     user_options = []
@@ -22,7 +24,7 @@ class PyTest(TestCommand):
 
 setup(
     name='mkdocs-markdownextradata-plugin',
-    version='0.1.0',
+    version='0.1.1',
     description='A MkDocs plugin that injects the mkdocs.yml extra variables into the markdown template',
     long_description=read('README.md'),
     long_description_content_type='text/markdown',
