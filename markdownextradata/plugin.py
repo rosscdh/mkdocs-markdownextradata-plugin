@@ -1,11 +1,12 @@
+import os
+import sys
+import json
+import yaml
+import mkdocs
 from mkdocs.plugins import BasePlugin
 
 from jinja2 import Template
-import os
 from pathlib import Path
-import mkdocs
-import yaml
-import json
 from itertools import chain
 
 CONFIG_KEYS = [
@@ -16,6 +17,10 @@ CONFIG_KEYS = [
     'repo_name'
 ]
 
+if sys.version_info[0] >= 3:
+    str_type = str
+else:
+    str_type = mkdocs.utils.string_types
 
 class MarkdownExtraDataPlugin(BasePlugin):
     """
@@ -23,7 +28,7 @@ class MarkdownExtraDataPlugin(BasePlugin):
     """
 
     config_scheme = (
-        ('data', mkdocs.config.config_options.Type(mkdocs.utils.string_types, default=None)),
+        ('data', mkdocs.config.config_options.Type(str_type, default=None)),
     )
 
     def __add_data__(self, config, namespace, data):
