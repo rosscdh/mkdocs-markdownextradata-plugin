@@ -3,6 +3,7 @@ import sys
 import json
 import yaml
 import mkdocs
+from mkdocs.plugins import BasePlugin
 
 from jinja2 import Template
 from pathlib import Path
@@ -16,7 +17,7 @@ else:
     str_type = mkdocs.utils.string_types
 
 
-class MarkdownExtraDataPlugin(mkdocs.plugins.BasePlugin):
+class MarkdownExtraDataPlugin(BasePlugin):
     """
     Inject certain config variables into the markdown
     """
@@ -37,36 +38,53 @@ class MarkdownExtraDataPlugin(mkdocs.plugins.BasePlugin):
         holder[namespace[0]] = data
 
     def on_pre_build(self, config):
-        # this loads all data from the supplied data directory, or otherwise a _data directory next to mkdocs.yml or inside the docs_dir. Does nothing if the dir does not exist.
+        # Loads all data from the supplied data directories
+        # or, otherwise a _data directory next to mkdocs.yml and/or inside the docs_dir.
+        # Does nothing if the dir does not exist.
 
-        data = self.config.get("data")
-        for datadir in [
-            os.path.dirname(config["config_file_path"]),
-            config["docs_dir"],
-        ]:
-            if not data:
-                data = os.path.join(datadir, "_data")
-                if not os.path.exists(data):
-                    data = None
+        # assume an empty list if not defined
+        data_source_folders = self.config.get("data")
+        # cast as a list if is defined but is a string
+        if isinstance(data_source_folders, str):
+            data_source_folders = data_source_folders.split(',')
 
-        if data and os.path.exists(data):
-            path = Path(data)
-            for filename in chain(path.glob("**/*.yml"), path.glob("**/*.json")):
-                with open(filename) as f:
-                    namespace = os.path.splitext(os.path.relpath(filename, data))[0]
+        # if we have not value, then proceed to look in default folders
+        # and assume a _data folder, add to list of folders to check
+        if not data_source_folders:
+            for datadir in [
+                os.path.dirname(config["config_file_path"]),
+                config["docs_dir"],
+            ]:
+                ds_folder = os.path.join(datadir, "_data")
+                if os.path.exists(ds_folder):
+                    data_source_folders.append(ds_folder)
+
+        if not data_source_folders:
+            return
+
+        # iterate of a list of folders and look for data files
+        for ds_folder in data_source_folders:
+            if os.path.exists(ds_folder):
+                path = Path(ds_folder)
+                for filename in chain(
+                    path.glob("**/*.yaml"),
+                    path.glob("**/*.yml"),
+                    path.glob("**/*.json"),
+                ):
+                    namespace = os.path.splitext(os.path.relpath(filename, ds_folder))[0]
+                    # add data into dict based on its path as a namespace
                     self.__add_data__(
                         config,
                         namespace,
                         (
-                            yaml.load(f, Loader=yaml.FullLoader)
-                            if filename.suffix == ".yml"
-                            else json.load(f)
+                            yaml.load(filename.read_bytes(), Loader=yaml.FullLoader)
+                            if filename.suffix in [".yml", ".yaml"]
+                            else json.load(filename.read_bytes())
                         ),
                     )
 
     def on_page_markdown(self, markdown, config, **kwargs):
         context = {key: config.get(key) for key in CONFIG_KEYS if key in config}
         context.update(config.get("extra", {}))
-        extra = config.get("extra")
         md_template = Template(markdown)
-        return md_template.render(**extra)
+        return md_template.render(**config.get("extra"))

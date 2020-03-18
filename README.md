@@ -35,26 +35,6 @@ You are then able to use the mkdocs `extra: {}` hash to pass context data into y
 > **Note:** If you have no `plugins` entry in your config file yet, you'll likely also want to add the `search` plugin. MkDocs enables it by default if there is no `plugins` entry set, but now you have to enable it explicitly.
 
 
-### Using external data files
-
-If the `extra: {}` hash is not enough for your data then you are able to make use of external yaml files to provide that context data
-
-```yaml
-plugins:
-    - search
-    - markdownextradata:
-        data: path/to/datafiles
-```
-
-The data path is optional; when absent, it will look for a `_data`
-folder adjacent to your `mkdocs.yml` and inside your `docs_dir`.
-If this path is found, the plugin will read all `.yml` and `.json`
-files inside it and add the data in them to the data available to the templates.
-The paths to these become their variable names, so if inside your data folder you have a file
-called `sections/captions.yml`, the data inside that file will be available in your
-templates as `sections.captions`.
-
-
 ## Features
 
 ### Use Extra Variables in your markdown files
@@ -62,6 +42,12 @@ templates as `sections.captions`.
 The variables you define in the mkdown.yml `extra:` slot will become available in your templates
 
 ```yaml
+site_name: My fantastic site
+
+plugins:
+    - search
+    - markdownextradata
+
 extra:
   customer:
     name: Your name here
@@ -75,6 +61,48 @@ and then in your `*.md` files
 {{ customer.name }}
 <a href="{{ customer.web }}">{{ customer.web }}</a>
 ```
+
+### Using external data files
+
+If the `extra: {}` hash is not enough for your data then you are able to make use of external yaml files to provide that context data
+
+```yaml
+plugins:
+    - search
+    - markdownextradata:
+        data: path/to/datafiles
+```
+
+or if you have multiple locations provide a comma (,) separated list of locations
+
+```yaml
+plugins:
+    - search
+    - markdownextradata:
+        data: path/to/datafiles, another/path/to/datafiles
+```
+
+if you leave `markdownextradata.data` empty
+
+```yaml
+plugins:
+    - search
+    - markdownextradata
+```
+
+by default it will search in the folder where your mkdocs.yml is kept
+and in the docs folder for another folder called `_data`
+
+i.e. `./docs/_data/site.yaml` - available as '{{ site.whatever_variable_in_the_yaml}}'
+
+If this path is found, the plugin will read all `.yml|.yaml` and `.json`
+files inside it and add the data in them, to the template context.
+
+If inside your data folder you have a directory and a file file
+called `[path/to/datafiles/]sections/captions.yaml` - where `[path/to/datafiles/]` is the path in your configuration -
+the data inside that file will be available in your templates as `sections.captions.whatever_variable_in_the_yaml`.
+
+
 
 ## Testing
 
