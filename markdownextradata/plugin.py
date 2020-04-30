@@ -79,7 +79,7 @@ class MarkdownExtraDataPlugin(BasePlugin):
                         (
                             yaml.load(filename.read_bytes(), Loader=yaml.FullLoader)
                             if filename.suffix in [".yml", ".yaml"]
-                            else json.load(filename.read_bytes())
+                            else json.loads(filename.read_bytes())
                         ),
                     )
 
