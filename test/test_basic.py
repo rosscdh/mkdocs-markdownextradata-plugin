@@ -12,6 +12,7 @@ config = yaml.load(open('test/mkdocs.yml', 'rb'), Loader=yaml.Loader)
 def test_basic_working():
     runner = CliRunner()
     customer = config.get('extra', {}).get('customer', {})
+    test_json_string = config.get('extra', {}).get('test_json_string', "")
 
     with tempfile.TemporaryDirectory() as tmpdir:
         result = runner.invoke(build_command, ['--config-file', 'test/mkdocs.yml', '--site-dir', tmpdir])
@@ -23,3 +24,5 @@ def test_basic_working():
 
         assert f"Hi there, {customer.get('name')}" in contents, f"customer.name is not in index"
         assert f"Welcome to {customer.get('web_url')}" in contents, f"customer.web_url is not in index"
+        assert isinstance(test_json_string, str), "test_json_string is not a str it should be"
+        assert '{"name": "Bob"}' == test_json_string, f"Json string is not correct"

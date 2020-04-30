@@ -11,3 +11,5 @@ extra:
   customer:
     name: Your name here
     web_url: www.example.com
+  test_json_string: |-
+    {"name": "Bob"}
