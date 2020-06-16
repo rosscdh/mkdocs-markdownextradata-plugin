@@ -8,9 +8,9 @@ plugins:
     - markdownextradata
 
 extra:
+  star: "![star](ressources/star.png)"
   customer:
     name: Your name here
     web_url: www.example.com
-    star: "![star](ressources/star.png)"
   test_json_string: |-
     {"name": "Bob"}
