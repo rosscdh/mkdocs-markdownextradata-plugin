@@ -3,11 +3,16 @@ import sys
 import json
 import yaml
 import mkdocs
+import logging
 from mkdocs.plugins import BasePlugin
+from mkdocs.utils import warning_filter
 
 from jinja2 import Template
 from pathlib import Path
 from itertools import chain
+
+log = logging.getLogger(__name__)
+log.addFilter(warning_filter)
 
 CONFIG_KEYS = ["site_name", "site_author", "site_url", "repo_url", "repo_name"]
 
@@ -83,8 +88,16 @@ class MarkdownExtraDataPlugin(BasePlugin):
                         ),
                     )
 
-    def on_page_markdown(self, markdown, config, **kwargs):
+    def on_page_read_source(self, page, config, **kwargs):
         context = {key: config.get(key) for key in CONFIG_KEYS if key in config}
         context.update(config.get("extra", {}))
-        md_template = Template(markdown)
-        return md_template.render(**config.get("extra"))
+        try:
+            with open(page.file.abs_src_path, 'r', encoding='utf-8-sig', errors='strict') as f:
+                md_template = Template(f.read())
+            return md_template.render(**config.get("extra"))
+        except OSError:
+            log.error('File not found: {}'.format(self.file.src_path))
+            raise
+        except ValueError:
+            log.error('Encoding error reading file: {}'.format(self.file.src_path))
+            raise

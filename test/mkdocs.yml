@@ -8,6 +8,7 @@ plugins:
     - markdownextradata
 
 extra:
+  star: "![star](ressources/star.png)"
   customer:
     name: Your name here
     web_url: www.example.com
