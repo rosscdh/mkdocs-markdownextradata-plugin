@@ -129,3 +129,4 @@ If you want to contribute to the code of this project, please read the [Contribu
 
 - [Ross Crawford-d'Heureuse](https://github.com/rosscdh)
 - [Emiliano Heyns](https://github.com/retorquere)
+- [Michael Jess](https://github.com/miffels)
