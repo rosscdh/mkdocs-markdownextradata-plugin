@@ -88,16 +88,8 @@ class MarkdownExtraDataPlugin(BasePlugin):
                         ),
                     )
 
-    def on_page_read_source(self, page, config, **kwargs):
+    def on_page_markdown(self, markdown, config, **kwargs):
         context = {key: config.get(key) for key in CONFIG_KEYS if key in config}
         context.update(config.get("extra", {}))
-        try:
-            with open(page.file.abs_src_path, 'r', encoding='utf-8-sig', errors='strict') as f:
-                md_template = Template(f.read())
-            return md_template.render(**config.get("extra"))
-        except OSError:
-            log.error('File not found: {}'.format(self.file.src_path))
-            raise
-        except ValueError:
-            log.error('Encoding error reading file: {}'.format(self.file.src_path))
-            raise
+        md_template = Template(markdown)
+        return md_template.render(**config.get("extra"))
