@@ -42,7 +42,7 @@ class MarkdownExtraDataPlugin(BasePlugin):
             del namespace[0]
         holder[namespace[0]] = data
 
-    def on_pre_build(self, config):
+    def on_pre_build(self, config, **kwargs):
         # Loads all data from the supplied data directories
         # or, otherwise a _data directory next to mkdocs.yml and/or inside the docs_dir.
         # Does nothing if the dir does not exist.
