@@ -7,7 +7,7 @@ import logging
 from mkdocs.plugins import BasePlugin
 from mkdocs.utils import warning_filter
 
-from jinja2 import Template
+import jinja2
 from pathlib import Path
 from itertools import chain
 
@@ -91,5 +91,6 @@ class MarkdownExtraDataPlugin(BasePlugin):
     def on_page_markdown(self, markdown, config, **kwargs):
         context = {key: config.get(key) for key in CONFIG_KEYS if key in config}
         context.update(config.get("extra", {}))
-        md_template = Template(markdown)
+        env = jinja2.Environment(undefined=jinja2.DebugUndefined)
+        md_template = env.from_string(markdown)
         return md_template.render(**config.get("extra"))
