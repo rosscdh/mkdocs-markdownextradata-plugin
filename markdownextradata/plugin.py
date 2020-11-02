@@ -27,8 +27,11 @@ class MarkdownExtraDataPlugin(BasePlugin):
     Inject certain config variables into the markdown
     """
 
+    JINJA_OPTIONS = "jinja_options"
+
     config_scheme = (
         ("data", mkdocs.config.config_options.Type(str_type, default=None)),
+        ("jinja_options", mkdocs.config.config_options.Type(dict, default={}))
     )
 
     def __add_data__(self, config, namespace, data):
@@ -91,6 +94,7 @@ class MarkdownExtraDataPlugin(BasePlugin):
     def on_page_markdown(self, markdown, config, **kwargs):
         context = {key: config.get(key) for key in CONFIG_KEYS if key in config}
         context.update(config.get("extra", {}))
-        env = jinja2.Environment(undefined=jinja2.DebugUndefined)
+        jinja_options = self.config[self.JINJA_OPTIONS]
+        env = jinja2.Environment(undefined=jinja2.DebugUndefined, **jinja_options)
         md_template = env.from_string(markdown)
         return md_template.render(**config.get("extra"))

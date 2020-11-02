@@ -25,5 +25,6 @@ def test_basic_working():
         assert '<h1 id="hi-there-your-name-here">Hi there, Your name here</h1>' in contents, f"customer.name is not in index"
         assert '<p>Inside the included md file there 3 <img alt="star" src="ressources/star.png" /></p></div>' in contents, f"customer.star is not in index or not rendering as expected"
         assert f"Welcome to {customer.get('web_url')}" in contents, f"customer.web_url is not in index"
+        assert f"{{#binding.path}}" in contents, f"Jinja2 comment syntax wasn't reconfigured via jinja_options as expected"
         assert isinstance(test_json_string, str), "test_json_string is not a str it should be"
         assert '{"name": "Bob"}' == test_json_string, f"Json string is not correct"
