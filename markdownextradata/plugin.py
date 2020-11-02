@@ -31,7 +31,7 @@ class MarkdownExtraDataPlugin(BasePlugin):
 
     config_scheme = (
         ("data", mkdocs.config.config_options.Type(str_type, default=None)),
-        ("jinja_options", mkdocs.config.config_options.Type(dict, default={}))
+        (JINJA_OPTIONS, mkdocs.config.config_options.Type(dict, default={}))
     )
 
     def __add_data__(self, config, namespace, data):
