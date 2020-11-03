@@ -5,7 +5,9 @@ use_directory_urls: true
 #     custom_dir: 'theme/'
 plugins:
     - search
-    - markdownextradata
+    - markdownextradata:
+        jinja_options:
+          comment_start_string: __COMMENTSTART__
 
 extra:
   star: "![star](ressources/star.png)"

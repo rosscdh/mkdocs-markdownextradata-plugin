@@ -102,7 +102,19 @@ If inside your data folder you have a directory and a file file
 called `[path/to/datafiles/]sections/captions.yaml` - where `[path/to/datafiles/]` is the path in your configuration -
 the data inside that file will be available in your templates as `sections.captions.whatever_variable_in_the_yaml`.
 
+### Jinja2 Template Engine Configuration
 
+You may provide [Jinja2 configuration](https://jinja.palletsprojects.com/en/2.11.x/api/#high-level-api) as plugin options:
+
+```yml
+plugins:
+    - markdownextradata:
+        jinja_options:
+          comment_start_string: __CUSTOMCOMMENTSTART__
+```
+
+The above example will make it so that instead of `{#`, the template engine will interpret `__CUSTOMCOMMENTSTART__` as comment start delimiter. This is useful in cases where
+you write Markdown that contains Jinja-like syntax that's colliding with the template engine. Alternatively, it lets you control what the variable delimiter is (instead of the default `{{ }}`).
 
 ## Testing
 
