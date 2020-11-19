@@ -24,7 +24,7 @@ class PyTest(TestCommand):
 
 setup(
     name='mkdocs-markdownextradata-plugin',
-    version='0.1.7',
+    version='0.1.9',
     description='A MkDocs plugin that injects the mkdocs.yml extra variables into the markdown template',
     long_description=read('README.md'),
     long_description_content_type='text/markdown',
