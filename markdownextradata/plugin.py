@@ -51,7 +51,7 @@ class MarkdownExtraDataPlugin(BasePlugin):
         # Does nothing if the dir does not exist.
 
         # assume an empty list if not defined
-        data_source_folders = self.config.get("data")
+        data_source_folders = self.config.get("data", {})
         # cast as a list if is defined but is a string
         if isinstance(data_source_folders, str):
             data_source_folders = data_source_folders.split(',')
