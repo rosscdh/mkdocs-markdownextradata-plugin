@@ -51,7 +51,7 @@ class MarkdownExtraDataPlugin(BasePlugin):
         # Does nothing if the dir does not exist.
 
         # assume an empty list if not defined
-        data_source_folders = self.config.get("data", {})
+        data_source_folders = self.config.get("data", [])
         # cast as a list if is defined but is a string
         if isinstance(data_source_folders, str):
             data_source_folders = data_source_folders.split(',')
@@ -59,6 +59,7 @@ class MarkdownExtraDataPlugin(BasePlugin):
         # if we have not value, then proceed to look in default folders
         # and assume a _data folder, add to list of folders to check
         if not data_source_folders:
+            data_source_folders = []
             for datadir in [
                 os.path.dirname(config["config_file_path"]),
                 config["docs_dir"],
