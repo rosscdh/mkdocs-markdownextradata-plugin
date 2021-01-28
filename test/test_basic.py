@@ -22,6 +22,7 @@ def test_basic_working():
         assert index_file.exists(),  f"{index_file} does not exist, it should"
         contents = index_file.read_text()
 
+        assert 'Where we should see junk.a_key: has a value' in contents, f"docs/_data.junk.yaml does not have the right key/val junk.a_key"
         assert '<a href="page/" class="nav-link">Hi there, Your name here</a>' in contents, f"customer.name is not in index"
         assert '<p>Inside the included md file there 3 <img alt="star" src="ressources/star.png" /></p>' in contents, f"customer.star is not in index or not rendering as expected"
         assert f"Welcome to {customer.get('web_url')}" in contents, f"customer.web_url is not in index"
