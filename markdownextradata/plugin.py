@@ -106,8 +106,5 @@ class MarkdownExtraDataPlugin(BasePlugin):
     # Apply Jinja2 substitution to specified string
     def apply_template(self, template_string):
         md_template = self.env.from_string(template_string)
-        try:
-            return md_template.render(**self.mkdocsConfig.get("extra"))
-        except jinja2.exceptions.UndefinedError:
-            return md_template.render(**self.mkdocsConfig)
+        return md_template.render(dict(**self.mkdocsConfig.get("extra"), **self.mkdocsConfig))
 
