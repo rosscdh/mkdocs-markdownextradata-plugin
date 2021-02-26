@@ -106,5 +106,5 @@ class MarkdownExtraDataPlugin(BasePlugin):
     # Apply Jinja2 substitution to specified string
     def apply_template(self, template_string):
         md_template = self.env.from_string(template_string)
-        return md_template.render(dict(**self.mkdocsConfig.get("extra"), **self.mkdocsConfig))
+        return md_template.render({**self.mkdocsConfig, **self.mkdocsConfig.get("extra")})
 
