@@ -105,6 +105,12 @@ class MarkdownExtraDataPlugin(BasePlugin):
 
     # Apply Jinja2 substitution to specified string
     def apply_template(self, template_string):
-        md_template = self.env.from_string(template_string)
-        return md_template.render({**self.mkdocsConfig, **self.mkdocsConfig.get("extra")})
+        try:
+            md_template = self.env.from_string(template_string)
+            return md_template.render({**self.mkdocsConfig, **self.mkdocsConfig.get("extra")})
+        except jinja2.exceptions.TemplateSyntaxError:
+            print(f"ERROR\t-  markdownextradata - One or more yaml files might not comply with "
+                "Python's variable naming conventions. Try accessing the variable through the "
+                "'extra' dictionary. Check the README for more information.")
+            raise
 
