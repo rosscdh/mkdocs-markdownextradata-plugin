@@ -91,16 +91,27 @@ plugins:
 ```
 
 by default it will search in the folder where your mkdocs.yml is kept
-and in the docs folder for another folder called `_data`
+and in the docs folder for another folder called `_data` 
+(i.e. `./docs/_data/site.yaml`), available as `{{ site.whatever_variable_in_the_yaml}}`.
 
-i.e. `./docs/_data/site.yaml` - available as '{{ site.whatever_variable_in_the_yaml}}'
+If these paths are found, the plugin will read all `.yml|.yaml` and `.json`
+files inside them and add the data in them under the `extra` key.
 
-If this path is found, the plugin will read all `.yml|.yaml` and `.json`
-files inside it and add the data in them, to the template context.
+For example, if you have a file called `[path/to/datafiles/]sections/captions.yaml` 
+which includes a variable `foo` - where `[path/to/datafiles/]` is the path declared
+in your configuration under `data` - the data inside that file will be available in
+ your templates as `{{sections.captions.foo}}` or `{{sections['captions']['foo']}}`.
 
-If inside your data folder you have a directory and a file file
-called `[path/to/datafiles/]sections/captions.yaml` - where `[path/to/datafiles/]` is the path in your configuration -
-the data inside that file will be available in your templates as `sections.captions.whatever_variable_in_the_yaml`.
+Alternatively, you can access all files and variable declared under `data` in template
+using `extra` key. 
+This is particularly useful if your folder or filename do not comply with the Python
+variable naming rules.
+For example, if you have a file `[path/to/datafiles/]1_example/captions.yaml`
+which includes a variable `bar`, writting the template as 
+`{{1_example.captions.bar}}` returns a `jinja2.exceptions.TemplateSyntaxError` since
+the folder `1_example` starts with a number. Instead, you can call this file with
+ when the template is `{{extra['1_example']['captions']['bar']}}`.
+
 
 ### Jinja2 Template Engine Configuration
 
@@ -142,3 +153,4 @@ If you want to contribute to the code of this project, please read the [Contribu
 - [Ross Crawford-d'Heureuse](https://github.com/rosscdh)
 - [Emiliano Heyns](https://github.com/retorquere)
 - [Michael Jess](https://github.com/miffels)
+- [João Moura](https://github.com/operte)
