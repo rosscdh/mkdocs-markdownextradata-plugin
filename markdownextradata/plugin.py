@@ -53,8 +53,9 @@ class MarkdownExtraDataPlugin(BasePlugin):
         # assume an empty list if not defined
         data_source_folders = self.config.get("data", [])
         # cast as a list if is defined but is a string
+        base_path = os.path.dirname(config["config_file_path"])
         if isinstance(data_source_folders, str):
-            data_source_folders = data_source_folders.split(',')
+            data_source_folders =  [f"{base_path}/{i}" for i in data_source_folders.split(',')]
 
         # if we have not value, then proceed to look in default folders
         # and assume a _data folder, add to list of folders to check
