@@ -6,9 +6,9 @@ Thank you for considering to contribute to this project. These guidelines will h
 
 ## Development
 
-#### Setup
+### Setup
 
-##### Prerequisites
+#### Prerequisites
 
 - [Python]
 - [virtualenv]
@@ -33,16 +33,16 @@ pytest
 
 To get changes merged, create a pull request. Here are a few things to pay attention to when doing so: 
 
-#### Commit Messages
+### Commit Messages
 
 The summary of a commit should be concise and worded in an imperative mood.  
 ...a *what* mood? This should clear things up: *[How to Write a Git Commit Message][git-commit-message]*
 
-#### Code Style
+### Code Style
 
 Make sure your code follows [PEP-8](https://www.python.org/dev/peps/pep-0008/) and keeps things consistent with the rest of the code. 
 
-#### Tests
+### Tests
 
 If it makes sense, writing tests for your PRs is always appreciated and will help get them merged.
 
