@@ -16,12 +16,6 @@ log.addFilter(warning_filter)
 
 CONFIG_KEYS = ["site_name", "site_author", "site_url", "repo_url", "repo_name"]
 
-if sys.version_info[0] >= 3:
-    str_type = str
-else:
-    str_type = mkdocs.utils.string_types
-
-
 class MarkdownExtraDataPlugin(BasePlugin):
     """
     Inject certain config variables into the markdown
@@ -30,7 +24,7 @@ class MarkdownExtraDataPlugin(BasePlugin):
     JINJA_OPTIONS = "jinja_options"
 
     config_scheme = (
-        ("data", mkdocs.config.config_options.Type(str_type, default=None)),
+        ("data", mkdocs.config.config_options.Type(str, default=None)),
         (JINJA_OPTIONS, mkdocs.config.config_options.Type(dict, default={}))
     )
 
