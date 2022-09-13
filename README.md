@@ -4,17 +4,15 @@
 
 *A MkDocs plugin that injects the mkdocs.yml extra variables into the markdown template*
 
-**usecase**
+## usecase
 
-```
-As a user with variables that need to be inserted at the markdown level, not the template level.
+> As a user with variables that need to be inserted at the markdown level, not the template level.
 I need a mkdocs plugin that will inject my `extras` variables into the markdown template before it gets rendered to html.
-So that I can build my markdown pages with different values for images, urls, client_names, etc. 
-```
+So that I can build my markdown pages with different values for images, urls, client_names, etc.
 
 ## Installation
 
-> **Note:** This package requires MkDocs version 0.17 or higher. 
+> **Note:** This package requires MkDocs version 0.17 or higher.
 
 Install the package with pip:
 
@@ -91,23 +89,23 @@ plugins:
 ```
 
 by default it will search in the folder where your mkdocs.yml is kept
-and in the docs folder for another folder called `_data` 
+and in the docs folder for another folder called `_data`
 (i.e. `./docs/_data/site.yaml`), available as `{{ site.whatever_variable_in_the_yaml}}`.
 
 If these paths are found, the plugin will read all `.yml|.yaml` and `.json`
 files inside them and add the data in them under the `extra` key.
 
-For example, if you have a file called `[path/to/datafiles/]sections/captions.yaml` 
+For example, if you have a file called `[path/to/datafiles/]sections/captions.yaml`
 which includes a variable `foo` - where `[path/to/datafiles/]` is the path declared
 in your configuration under `data` - the data inside that file will be available in
  your templates as `{{sections.captions.foo}}` or `{{sections['captions']['foo']}}`.
 
 Alternatively, you can access all files and variable declared under `data` in template
-using `extra` key. 
+using `extra` key.
 This is particularly useful if your folder or filename do not comply with the Python
 variable naming rules.
 For example, if you have a file `[path/to/datafiles/]1_example/captions.yaml`
-which includes a variable `bar`, writting the template as 
+which includes a variable `bar`, writting the template as
 `{{1_example.captions.bar}}` returns a `jinja2.exceptions.TemplateSyntaxError` since
 the folder `1_example` starts with a number. Instead, you can call this file with
  when the template is `{{extra['1_example']['captions']['bar']}}`.
@@ -129,7 +127,7 @@ you write Markdown that contains Jinja-like syntax that's colliding with the tem
 
 ## Testing
 
-```
+```bash
 virtualenv venv -p python3.7
 source venv/bin/activate
 python setup.py test
@@ -142,9 +140,6 @@ From reporting a bug to submitting a pull request: every contribution is appreci
 Report bugs, ask questions and request features using [Github issues][github-issues].
 If you want to contribute to the code of this project, please read the [Contribution Guidelines][contributing].
 
-[travis-status]: https://travis-ci.org/rosscdh/mkdocs-markdownextradata-plugin.svg?branch=master
-[travis-link]: https://travis-ci.org/rosscdh/mkdocs-markdownextradata-plugin
-[mkdocs-plugins]: http://www.mkdocs.org/user-guide/plugins/
 [github-issues]: https://github.com/rosscdh/mkdocs-markdownextradata-plugin/issues
 [contributing]: CONTRIBUTING.md
 
