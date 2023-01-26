@@ -40,7 +40,7 @@ setup(
         'click',
     ],
     cmdclass = {'test': PyTest},
-    python_requires='>=3.4',
+    python_requires='>=3.6',
     install_requires=[
         'mkdocs',
         'pyyaml',
@@ -52,8 +52,6 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',

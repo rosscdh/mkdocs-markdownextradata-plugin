@@ -24,12 +24,12 @@ concurrency:
 jobs:
   run-pytest:
     name: Run pytest tests
-    # NOTE: we can change back to ubuntu-latest if we drop support for py3.6 and below
+    # NOTE: we can change back to ubuntu-latest if we drop support for py3.6
     runs-on: ubuntu-20.04
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.4", "3.5", "3.6", "3.7", "3.8", "3.9", "3.10", "3.11"]
+        python-version: ["3.6", "3.7", "3.8", "3.9", "3.10", "3.11"]
 
     steps:
       - name: Checkout repository
