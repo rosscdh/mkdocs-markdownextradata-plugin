@@ -24,7 +24,8 @@ concurrency:
 jobs:
   run-pytest:
     name: Run pytest tests
-    runs-on: ubuntu-latest
+    # NOTE: we can change back to ubuntu-latest if we drop support for py3.6 and below
+    runs-on: ubuntu-20.04
     strategy:
       fail-fast: false
       matrix:
