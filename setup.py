@@ -1,7 +1,6 @@
 import os
-import sys
 from setuptools import setup, find_packages
-from setuptools.command.test import test as TestCommand
+
 
 def read(fname):
     file_path = os.path.join(os.path.dirname(__file__), fname)
@@ -9,18 +8,6 @@ def read(fname):
         content = file.read()
     return content if content else 'no content read'
 
-class PyTest(TestCommand):
-    user_options = []
-
-    def initialize_options(self):
-        TestCommand.initialize_options(self)
-        self.pytest_args = []
-
-    def run_tests(self):
-        # import here, cause outside the eggs aren't loaded
-        import pytest
-        errno = pytest.main(self.pytest_args)
-        sys.exit(errno)
 
 setup(
     name='mkdocs-markdownextradata-plugin',
@@ -33,13 +20,6 @@ setup(
     author='Ross Crawford-d\'Heureuse',
     author_email='sendrossemail@gmail.com',
     license='MIT',
-    tests_require=[
-        'pytest',
-        'mkdocs',
-        'pyyaml',
-        'click',
-    ],
-    cmdclass = {'test': PyTest},
     python_requires='>=3.6',
     install_requires=[
         'mkdocs',
