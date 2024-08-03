@@ -5,14 +5,12 @@ import yaml
 import mkdocs
 import logging
 from mkdocs.plugins import BasePlugin
-from mkdocs.utils import warning_filter
 
 import jinja2
 from pathlib import Path
 from itertools import chain
 
 log = logging.getLogger(__name__)
-log.addFilter(warning_filter)
 
 CONFIG_KEYS = ["site_name", "site_author", "site_url", "repo_url", "repo_name"]
 
