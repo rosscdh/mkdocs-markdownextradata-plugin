@@ -154,3 +154,5 @@ If you want to contribute to the code of this project, please read the [Contribu
 - [Emiliano Heyns](https://github.com/retorquere)
 - [Michael Jess](https://github.com/miffels)
 - [João Moura](https://github.com/operte)
+- [Tim Vink](https://github.com/thatlittleboy)
+- [Jeremy Goh](https://github.com/timvink)
