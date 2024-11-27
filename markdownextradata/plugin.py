@@ -29,6 +29,7 @@ class MarkdownExtraDataPlugin(BasePlugin):
 
     config_scheme = (
         ("data", mkdocs.config.config_options.Type(str_type, default=None)),
+        ("base_dirs", mkdocs.config.config_options.Type(list, default=None)),
         (JINJA_OPTIONS, mkdocs.config.config_options.Type(dict, default={}))
     )
 
@@ -99,7 +100,8 @@ class MarkdownExtraDataPlugin(BasePlugin):
     # Initialize this mkdocs config and Jinja2 env
     def on_config(self, mkdocsConfig, **kwargs):
         jinja_options = self.config[self.JINJA_OPTIONS]
-        self.env = jinja2.Environment(undefined=jinja2.DebugUndefined, **jinja_options)
+        loader = self.get_file_loader(mkdocsConfig)
+        self.env = jinja2.Environment(undefined=jinja2.DebugUndefined, loader=loader, **jinja_options)
         self.mkdocsConfig = mkdocsConfig
 
     # Apply Jinja2 substitution to specified string
@@ -112,4 +114,20 @@ class MarkdownExtraDataPlugin(BasePlugin):
                 "Python's variable naming conventions. Try accessing the variable through the "
                 "'extra' dictionary. Check the README for more information.")
             raise
+
+    def get_file_loader(self, mkdocsConfig) -> jinja2.BaseLoader:
+        docs_dir = mkdocsConfig["docs_dir"]
+        base_dirs = self.config.get("base_dirs", [])
+        if not base_dirs:
+            return jinja2.FileSystemLoader(docs_dir)
+
+        if isinstance(base_dirs, str):
+            base_dirs = base_dirs.split(',')
+
+        base_dirs = [os.path.join(docs_dir, i) for i in base_dirs]
+
+        base_dirs.insert(0, docs_dir)
+
+        data_source_loaders = [jinja2.FileSystemLoader(i) for i in base_dirs]
+        return jinja2.ChoiceLoader(data_source_loaders)
 
